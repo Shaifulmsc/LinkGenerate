@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Affiliate Link generator</title>
+    <!--    <script type="text/javascript" src="../js/codeGenerator.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style_script.css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=MuseoModerno:wght@100&display=swap"
+          rel="stylesheet">
+
+    <style>
+        #wrapper {
+            margin: 0;
+            padding: 0;
+        }
+
+        .input-groups {
+            background-color: #bec3c5;
+            display: inline-block;
+            float: left;
+            max-width: 300px;
+            border: 1px solid black;
+            margin: 20px;
+            overflow: auto;
+        }
+
+        input[type=text] {
+            min-width: 15%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-input {
+            max-width: 72%;
+        }
+
+
+        .form-button {
+            background-color: #e7e7e7;
+            color: black;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        label{
+            text-align: center;
+            font-family: cursive;
+            background-color: black;
+            color: white;
+            display: block;
+            margin-top: 12px;
+        }
+        img {
+            margin: 18px 50px;
+            border-radius: 22px;
+            display: block;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            var generate_inputs = document.getElementById('generate_inputs');
+            generate_inputs.addEventListener("click", Link_Generate);
+
+
+        };
+
+        function Link_Generate(event) {
+            event.preventDefault();
+            var products = [
+                {
+                    image:'https://loremflickr.com/150/150',
+                    title:'XRS01',
+                },
+                {
+                    image:'https://loremflickr.com/150/150',
+                    title:'XRS02',
+                },
+                {
+                    image:'https://loremflickr.com/150/150',
+                    title:'XRS03',
+                },
+                {
+                    image:'https://loremflickr.com/150/150',
+                    title:'XRS04',
+                },
+                {
+                    image:'https://loremflickr.com/150/150',
+                    title:'XRS05',
+                }, {
+                    image:'https://loremflickr.com/150/150',
+                    title:'XRS06',
+                }
+            ];
+            var links = '';
+            var link = 'www.ski-roller.de/';
+            var result = document.getElementById('wrapper');
+            var code_id = document.getElementById("code_id").value;
+            for (i = 1; i < 6; i++) {
+                links += '   <div class="input-groups">' +
+                    '         <input class="form-input" id="link_' + i + '" type="text" name="link_' + i + '" ' +
+                    '        value="' + link + products[i].title + '/=' + code_id + '" placeholder="Generated Link "/>' +
+                    '        <input class="form-button" type="submit" id="' + i + '"  value="Copy" onclick="copyToClipboard(this.id)" "/>' +
+                    '             <label> ' + products[i].title + ' </label>' +
+                    '             <img  title="' + products[i].title + '" src="' + products[i].image + '">' +
+                    '       </div>';
+            }
+            result.innerHTML = links;
+        }
+
+
+        function copyToClipboard(id) {
+            var copyText = document.getElementById("link_" + id);
+            copyText.select();
+            document.execCommand("copy");
+            document.getElementById(id).value = "Copied";
+            console.log(copyText.value);
+
+        }
+    </script>
+</head>
+
+<body>
+<br>
+<form id="generator-form">
+    <input class="form-input" id="code_id" type="text" name="code_id" value="" placeholder="Put your Code Here">
+    <input type="submit" value="Link Generate" class="form-button" id="generate_inputs">
+</form>
+<br>
+
+<div id="wrapper"></div>
+
+</body>
+</html>
